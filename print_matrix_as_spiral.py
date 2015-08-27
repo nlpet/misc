@@ -4,7 +4,7 @@ flag = False
 
 
 def spiral(p, l, flag):
-    """Docstring."""
+    """Create a spiral."""
     m, n = 50, 50
     matrix = [list(range(m)) for _ in range(n)]
     for row in matrix:
