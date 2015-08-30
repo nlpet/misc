@@ -1,6 +1,4 @@
 """Print a n x m matrix as a spiral."""
-p, l = 0, 5
-flag = False
 
 
 def spiral(p, l, flag):
@@ -17,4 +15,7 @@ def spiral(p, l, flag):
             else:
                 p -= 1
 
-spiral(p, l, flag)
+if __name__ == '__main__':
+    p, l = 0, 5
+    flag = False
+    spiral(p, l, flag)
