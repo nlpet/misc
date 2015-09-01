@@ -1,2 +1,2 @@
 # misc
-Various exercises
+Various exercises & experiments
