@@ -46,7 +46,7 @@ def draw(x_points, y_points):
 
 
 if __name__ == '__main__':
-    x_points, y_points = bresenham(0, 10, 10, 1)
+    x_points, y_points = bresenham(x0, y0, x1, y1)
     print x_points
     print y_points
     draw(x_points, y_points)
