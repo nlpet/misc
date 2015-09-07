@@ -12,11 +12,15 @@ class TestMaximalSubarray(unittest.TestCase):
         self.assertEqual(maximal_subarray([-1, 5, 100, -1000]), 105)
         self.assertEqual(maximal_subarray([-1, -2, -3, -4]), 0)
         self.assertEqual(maximal_subarray([1000, 20000, -1, 300000000]), 300020999)
-        self.assertEqual(maximal_subarray([3,4,-3,-5,1,0,-1,2,-4,-2]), 7)
-        self.assertEqual(maximal_subarray([-5,0,-4,1,4,3,-2,-1,2,-3]), 8)
+        self.assertEqual(maximal_subarray([3, 4, -3, -5, 1, 0, -1, 2, -4, -2]), 7)
+        self.assertEqual(maximal_subarray([-5, 0, -4, 1, 4, 3, -2, -1, 2, -3]), 8)
         
 
 def maximal_subarray(array):
+    """
+
+    :list : array
+    """
     if min(array) >= 0:
         return sum(array)
     if max(array) <= 0:
