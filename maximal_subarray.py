@@ -3,7 +3,7 @@ import unittest
 
 class TestMaximalSubarray(unittest.TestCase):
 
-    """Unit tests for max product of triples."""
+    """Unit tests maximal subarray."""
 
     def tests(self):
         """Tests."""
