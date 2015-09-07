@@ -3,7 +3,7 @@ import unittest
 
 class TestMaximalSubarray(unittest.TestCase):
 
-    """Unit tests maximal subarray."""
+    """Unit tests for max product of triples."""
 
     def tests(self):
         """Tests."""
@@ -25,18 +25,12 @@ def maximal_subarray(array):
         return sum(array)
     if max(array) <= 0:
         return 0
-    length = len(array)
-    result_array = [0 for _ in range(length)]
-    result_array[0] = array[0] if array[0] > 0 else 0
-    for i in range(1, length):
-        if array[i] <= 0:
-            if result_array[i - 1] > 0:
-                result_array[i] = result_array[i - 1] + array[i]
-            else:
-                result_array[i] = result_array[i - 1]
-        else:
-            result_array[i] = result_array[i - 1] + array[i]
-    return max(result_array)
+
+    current_sum, max_sum = 0, 0
+    for i in range(len(array)):
+        current_sum = max(current_sum + array[i], 0)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
     
   
 if __name__ == '__main__':
