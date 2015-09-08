@@ -10,26 +10,32 @@ import numpy as np
 
 
 def distance_1d(array):
+    """
+    :list, np.array : array
+    """
     return int(round(np.median(array)))
 
 
 def distance_2d(matrix):
+    """
+    : n x n list of lists : matrix
+    """
     matrix = np.array(matrix)
-    h, w = matrix.shape
+    height, width = matrix.shape
     row_vector, column_vector = [], []
-    for r in range(h):
-        column_vector.append(distance_1d(matrix[r]))
-    for c in range(w):
-        row_vector.append(distance_1d(matrix[:, c]))
+    for row in range(height):
+        column_vector.append(distance_1d(matrix[row]))
+    for col in range(width):
+        row_vector.append(distance_1d(matrix[:, col]))
     return (distance_1d(row_vector), distance_1d(column_vector))
 
 
-
 if __name__ == '__main__':
-    x, y = 10, 10
+    width, height = 10, 10
     start, finish = 1, 10
-    matrix = np.array([np.random.random_integers(start, finish, x) for _ in range(y)])
-    print('\nStreet:')
-    print(matrix)
-    print('\nMeeting point:')
-    print(distance_2d(matrix))
+    mapp = np.array([np.random.random_integers(start, finish, width)
+                    for _ in range(height)])
+    print '\nGrid:'
+    print mapp
+    print '\nMeeting point:'
+    print distance_2d(mapp)
