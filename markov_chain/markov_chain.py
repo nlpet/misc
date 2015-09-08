@@ -6,12 +6,13 @@ from random import choice
 import os
 import pyPdf
 import string
+import codecs
 
 
 def read_pdf(infile, outfile):
     """Read PDF and save text as .txt."""
     pdf = pyPdf.PdfFileReader(open(infile, 'rb'))
-    with open(outfile, 'w') as wr:
+    with codecs.open(outfile, 'w', 'utf-8') as wr:
         for page in pdf.pages:
             wr.write(page.extractText())
     print("Wrote text version of the PDF to %s" % outfile)
@@ -60,10 +61,10 @@ def display_generated_text(text):
 
 
 if __name__ == '__main__':
-    pdffile = "DouglasAdams_TheHitchhikerTrilogy_5Books1ShortStory.pdf"
-    textfile = "flatland.txt"
-    pickledfile = "flatland.p"
+    pdffile = "The Animate and Inanimate.pdf"
+    textfile = "animate_inanimate.txt"
+    pickledfile = "animate_inanimate.p"
     iterations = 200
-    #read_pdf(pdffile, textfile)
+    read_pdf(pdffile, textfile)
     create_markov_chain_from_text(textfile, pickledfile)
     generate_text_from_chain(pickledfile, iterations)
