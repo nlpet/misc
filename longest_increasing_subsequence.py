@@ -3,7 +3,7 @@ Given an array, find the longest increasing (not necessarily consecutive)
 subsequence.
 """
 
-
+# Faster solution
 def subsequence(array):
     """
     :list : array (input array)
@@ -55,8 +55,19 @@ def subsequence(array):
     return result[::-1]
 
 
+# Slower solution
+def subsequence2(a):
+    r = []
+    for i in range(len(a)):
+        # Longest increasing subsequence up to a[i]
+        lis = [r[j] for j in range(i) if r[j][-1] < a[i]] or [[]]
+        r.append(max(lis, key=len) + [a[i]])
+    return max(r, key=len)
+
+
+
 if __name__ == '__main__':
-    A = [10, 12, 11, 3, 5, 60, 50, 55, 56, 68, 59, 60]
+    A = [1, 2, 5, 4, 5, 9, 6, 7, 11, 20, 19, 21]
     print "Array is: %s" % " ".join([str(n) for n in A])
-    subseq = subsequence(A)
+    subseq = subsequence2(A)
     print "Longest subseq is: %s" % " ".join([str(n) for n in subseq])
