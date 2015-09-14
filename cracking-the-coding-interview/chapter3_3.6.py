@@ -39,7 +39,7 @@ def quicksort(lst):
 
 
 if __name__ == '__main__':
-    array = [3,7,9,6,3,3,5,7,9,0,6,3]
+    array = [3, 7, 9, 6, 3, 3, 5, 7, 9, 0, 6, 3]
     print(' '.join([str(n) for n in array]))
     stack = Stack(array)
     sorted_stack = quicksort(stack)
