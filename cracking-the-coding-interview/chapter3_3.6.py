@@ -23,20 +23,24 @@ class Stack(object):
     def is_empty(self):
         return len(self.stack) == 0
 
-    def sort(self):
-        """Qucksort."""
-        if self.stack == []:
-            return []
-        else:
-            pivot = self.stack[0]
-            smaller = self.sort([x for x in self.stack[1:] if x < pivot])
-            greater = self.sort([x for x in self.stack[1:] if x >= pivot])
-            return smaller + [pivot] + greater
+    def __getitem__(self, indx):
+        return self.stack[indx]
+
+
+def quicksort(lst):
+    """Qucksort."""
+    if lst == []:
+        return []
+    else:
+        pivot = lst[0]
+        smaller = quicksort([x for x in lst[1:] if x < pivot])
+        greater = quicksort([x for x in lst[1:] if x >= pivot])
+        return smaller + [pivot] + greater
 
 
 if __name__ == '__main__':
     array = [3,7,9,6,3,3,5,7,9,0,6,3]
-    print ' '.join([str(n) for n in array])
+    print(' '.join([str(n) for n in array]))
     stack = Stack(array)
-    sorted_stack =  stack.sort()
-    print ' '.join([str(n) for n in sorted_stack])
+    sorted_stack = quicksort(stack)
+    print(' '.join([str(n) for n in sorted_stack]))
