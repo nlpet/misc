@@ -1,4 +1,4 @@
-"""Implement a binary search tree and find its max depth"""
+"""Implement a binary search tree and find its max height"""
 import unittest
 
 class TestBST(unittest.TestCase):
