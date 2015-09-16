@@ -1,4 +1,7 @@
-"""Implement a binary search tree and find its max height"""
+"""
+Implement a binary search tree and find its max height.
+Also implement pre, in and post order traversals and test them.
+"""
 import unittest
 
 class TestBST(unittest.TestCase):
