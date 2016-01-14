@@ -54,7 +54,7 @@ class NFSM:
 
     # Display test results
     def print_test_results(self, errors_only):
-        print '\n\t----- Test results for {} -----\n'.format(self.name)
+        print '\n----- Test results for {} -----\n'.format(self.name)
         stats = {'pass': 0, 'fail': [[], 0]}
         for k, v in self.tests.items():
             expected = self.validate_string(v[0])
