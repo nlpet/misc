@@ -186,7 +186,7 @@ class NFSMB(NFSM):
 
 if __name__ == '__main__':
     m1 = NFSMA(1, 50)
-    m1.run_tests(500, True)
+    m1.run_tests(50)
 
     m2 = NFSMB(1, 50)
-    m2.run_tests(500, True)
+    m2.run_tests(50)
