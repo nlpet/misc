@@ -1,5 +1,6 @@
-var assert = require('assert');
+'use strict';
 
+var assert = require('assert');
 var isCoolNumber = require(process.argv[2]);
 
 assert(isCoolNumber(42));
