@@ -2,9 +2,11 @@
 
 require('es6-promise');
 
-
 var promise = new Promise(function (fulfill, reject) {
-  setTimeout(() => fulfill('FULFILLED!'), 300);
-})
+  fulfill('PROMISE VALUE');
+});
 
-promise.then((res) => console.log(res));
+
+promise.then(console.log, null);
+
+console.log('MAIN PROGRAM');
