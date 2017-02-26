@@ -1,2 +1,1 @@
-# misc
-Various exercises & experiments
+Various personal exercises and experiments
