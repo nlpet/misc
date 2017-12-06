@@ -1,5 +1,6 @@
 # --- Day 6: Memory Reallocation ---
 import numpy as np
+from datetime import datetime
 
 
 def cycle(memory):
@@ -40,11 +41,16 @@ def main():
     with open('input.txt', 'r') as fr:
         memory = np.array([int(n) for n in fr.read().strip().split('\t')])
 
+    start = datetime.now()
+
     seen = find_cycle(memory, set())
     print('Redistribution cycles: {}'.format(len(seen)))
 
     seen = find_cycle(memory, set())
     print('Cycles: {}'.format(len(seen)))
+
+    end = datetime.now()
+    print('Finished in {}s'.format((end - start).total_seconds()))
 
 
 
