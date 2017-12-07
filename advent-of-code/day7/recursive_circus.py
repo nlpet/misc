@@ -10,12 +10,13 @@ def get_weights_mismatch(root: str, children: Children) -> int:
     expected_weight = None
     root_weight = children[root][1]
     for child in children[root][0]:
-        weight = get_weights_mismatch(child, children)
-        root_weight += weight
+        child_weight = get_weights_mismatch(child, children)
+        root_weight += child_weight
         if expected_weight is None:
-            expected_weight = weight
-        elif expected_weight != weight:
-            print(child, children[child][1] - (weight - expected_weight))
+            expected_weight = child_weight
+        elif expected_weight != child_weight:
+            diff = children[child][1] - (child_weight - expected_weight)
+            print(child, diff)
 
     return root_weight
 
@@ -24,7 +25,6 @@ def main() -> None:
     stack = []
     towers_children = {}
     towers_children_count = {}
-    tw_count = {}
     structures_reg = re.compile(r'(\w+)\s(\(\d+\))(\s->\s(.+))*')
 
     with open('input.txt', 'r') as fr:
@@ -36,18 +36,15 @@ def main() -> None:
                 children = groups[3].split(', ') if groups[3] else []
                 towers_children[tower] = (children, weight)
                 towers_children_count[tower] = len(children)
-                tw_count[tower] = weight
 
     for tower, children_and_weights in towers_children.items():
         for child in children_and_weights[0]:
             towers_children_count[tower] += towers_children_count[child]
-            tw_count[tower] += tw_count[child]
             stack.extend(towers_children[child][0])
 
         while stack:
             child = stack.pop()
             towers_children_count[tower] += towers_children_count[child]
-            tw_count[tower] += tw_count[child]
             stack.extend(towers_children[child][0])
 
     root = Counter(towers_children_count).most_common(1)[0][0]
