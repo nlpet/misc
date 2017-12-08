@@ -1,10 +1,13 @@
+# --- Day 1: Inverse Captcha ---
+
+
 def read_input(filename: str) -> str:
     with open(filename, 'r') as fr:
         return fr.read().strip()
 
 
 def main() -> None:
-    seq = read_input('input')
+    seq = read_input('input.txt')
     seq += seq[0]
     total = 0
 
