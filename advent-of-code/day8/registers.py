@@ -20,8 +20,7 @@ def main() -> None:
             if not match:
                 print('{} does not contain valid instructions'.format({line}))
 
-            groups = match.groups()
-            a, modifier, b, c, condition, d = groups
+            a, modifier, b, c, condition, d = match.groups()
 
             if conditions[condition](registers[c], int(d)):
                 registers[a] = modifiers[modifier](registers[a], int(b))
