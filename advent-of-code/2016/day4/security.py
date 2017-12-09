@@ -11,7 +11,8 @@ Name = List[str]
 def is_real_room(name: Name) -> str:
     all_letters = Counter(''.join(name))
     most_common = all_letters.most_common()
-    result, stack, lsc = [], [], 0
+    result, lsc = [], 0
+    stack: Name = []
 
     for l, c in most_common:
         if not stack or c == lsc:
@@ -37,7 +38,8 @@ def decrypt(name: Name, sector_id: int) -> str:
     return ' '.join([''.join(w) for w in decrypted])
 
 
-def find_north_pole_object_storage(name: Name, sector_id: int) -> int:
+def find_north_pole_object_storage(name: Name,
+                                   sector_id: int) -> Union[int, None]:
     decrypted = decrypt(name, sector_id)
     if decrypted.find('north') != -1:
         return sector_id
