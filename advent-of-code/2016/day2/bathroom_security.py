@@ -1,8 +1,6 @@
 # --- Day 2: Bathroom Security ---
 
-from operator import add
-from math import fabs
-from typing import Set, Tuple, List, Union, Any
+from typing import Tuple, List, Any
 
 
 Keypad = List[List[Any]]
