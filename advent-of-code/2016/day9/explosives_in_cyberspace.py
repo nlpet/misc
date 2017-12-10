@@ -16,6 +16,7 @@ def main() -> None:
                     end = comps[index + 1:].find(')') + index + 1
                     num, times = map(int, comps[index + 1: end].split('x'))
                     decomp = comps[end + 1:end + num + 1] * times
+                    print(decomp)
                     decomps.extend(decomp)
                     index = end + 1 + num
                 else:
