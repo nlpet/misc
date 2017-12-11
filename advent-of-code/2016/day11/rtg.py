@@ -1,6 +1,5 @@
 # --- Day 11: Radioisotope Thermoelectric Generators ---
 
-import sys
 from typing import List
 
 
