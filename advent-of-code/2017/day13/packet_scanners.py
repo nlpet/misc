@@ -1,51 +1,42 @@
 # --- Day 13: Packet Scanners ---
 
-from typing import List, Any
-from operator import add, sub
+from typing import List, Tuple
 
 
-Layers = List[Any]
-
-DIRECTIONS = {
-    True: add,
-    False: sub
-}
+Layer = Tuple[int, int]
+Layers = List[Layer]
 
 
-def cycle(layers: Layers) -> None:
-    for depth, items in enumerate(layers):
-        if items:
-            index, range_, direction = items
-            new_index = DIRECTIONS[direction](index, 1)
-            if new_index <= 0 or new_index >= range_ - 1:
-                layers[depth][2] = not layers[depth][2]
-            layers[depth][0] = new_index % range_
+def get_severity(pair: Layer) -> int:
+    depth, range_ = pair
+    return depth * range_ if depth % (range_ * 2 - 2) == 0 else 0
 
 
-def move_packet(layers: Layers, packet_index: int) -> int:
-    if layers[packet_index] and layers[packet_index][0] == 0:
-        return packet_index * layers[packet_index][1]
-    return 0
+def get_lowest_delay(layers: Layers) -> int:
+    while True:
+        severities = sum(map(get_severity, layers))
+        (delay, _), *_ = layers
+        if severities == 0:
+            return delay
+
+        layers = list(map(lambda item: (item[0] + 1, item[1]), layers))
 
 
 def main() -> None:
-    layers_dict = {}
-    severity = 0
-    packet_index = 0
+    layers = []
 
-    with open('input.txt', 'r') as fr:
+    with open('test.txt', 'r') as fr:
         for line in fr.readlines():
             depth, range_ = map(int, line.strip().split(': '))
-            layers_dict[depth] = [0, range_, True]
+            layers.append((depth, range_))
 
-    layers = [layers_dict.get(l) for l in range(0, max(layers_dict) + 1)]
-
-    for picosecond in range(len(layers)):
-        severity += move_packet(layers, packet_index)
-        cycle(layers)
-        packet_index += 1
-
+    # Part 1
+    severity = sum(map(get_severity, layers))
     print('The severity of the whole trip is {}'.format(severity))
+
+    # Part 2
+    lowest_delay = get_lowest_delay(layers)
+    print('The fewest number of picoseconds is {}'.format(lowest_delay))
 
 
 if __name__ == '__main__':
