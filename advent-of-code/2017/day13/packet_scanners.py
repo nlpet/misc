@@ -19,7 +19,7 @@ def get_lowest_delay(layers: Layers) -> int:
         if severities == 0:
             return delay
 
-        layers = list(map(lambda item: (item[0] + 1, item[1]), layers))
+        layers = [(d + 1, r) for d, r in layers]
 
 
 def main() -> None:
