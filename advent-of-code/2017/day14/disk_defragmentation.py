@@ -1,9 +1,14 @@
-# --- Day 10: Knot Hash ---
+# --- Day 14: Disk Defragmentation --
 
 from typing import List, Any
 from functools import partial, reduce
 from operator import xor
 import numpy as np
+from scipy.ndimage import label
+
+
+def hex_to_binary(s: str, scale: int, bits: int) -> str:
+    return ''.join(map(lambda ch: bin(int(ch, scale))[2:].zfill(bits), s))
 
 
 def execute_rounds(rounds: int, lengths: List[int]) -> List[int]:
@@ -33,15 +38,29 @@ def get_dense_hash(sparse_hash: Any) -> List[int]:
     return map(partial(reduce, xor), sparse_hash.reshape((16, 16)))
 
 
-def main() -> None:
-    with open('test.txt', 'r') as fr:
-        lengths = [ord(ch) for ch in fr.read().strip()]
-        lengths += [17, 31, 73, 47, 23]
-
+def generate_knot_hash(s: str) -> str:
+    lengths = [ord(ch) for ch in s] + [17, 31, 73, 47, 23]
     sparse_hash = execute_rounds(64, lengths)
     dense_hash = get_dense_hash(sparse_hash)
+    return ''.join(['{0:02x}'.format(n) for n in dense_hash])
 
-    print(''.join(['{0:02x}'.format(n) for n in dense_hash]))
+
+def main() -> None:
+    # Test input: flqrgnkx
+    puzzle_input = 'uugsqrei'
+    used = 0
+    arr = []
+
+    for i in range(128):
+        s = puzzle_input + '-{}'.format(i)
+        b = hex_to_binary(generate_knot_hash(s), 32, 4)
+        used += b.count('1')
+        arr.append([int(ch) for ch in b])
+
+    _, num_regions = label(np.array(arr))
+
+    print('Number of used squares is {}'.format(used))
+    print('Number of regions are {}'.format(num_regions))
 
 
 if __name__ == '__main__':
