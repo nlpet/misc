@@ -17,28 +17,35 @@ def get(grid: Grid, row: Row, col: Col):
     try:
         return grid[row][col]
     except IndexError:
-        return -1
+        return None
 
 
 def deal_with_crossroads(row: Row, col: Col, grid: Grid,
                          pd: str) -> Tuple[int, int, str]:
-    if pd == 'down' or pd == 'up':
-        if get(grid, row, col - 1) > 0:
+    if pd in {'up', 'down'}:
+        if get(grid, row, col - 1):
             return row, col - 1, 'left'
         else:
             return row, col + 1, 'right'
     else:
-        if get(grid, row - 1, col) > 0:
+        if get(grid, row - 1, col):
             return row - 1, col, 'up'
         else:
             return row + 1, col, 'down'
+
+
+def is_out_of_bounds(grid: Grid, row: Row, col: Col) -> bool:
+    l, w = grid.shape
+    if row < 0 or row >= l or col < 0 or col >= w or grid[row][col] == 0:
+        return True
+    return False
 
 
 def walk(grid: Grid, start: Coord, pd: str,
          lcoords: LetterCoords) -> Tuple[Word, int]:
     word: Word = []
     steps = 0
-    rows, cols = grid.shape
+
     row, col = start
     dirs: Dict[str, function] = {
         'down': lambda x, y: (x + 1, y),
@@ -49,7 +56,7 @@ def walk(grid: Grid, start: Coord, pd: str,
 
     while True:
         cell = grid[row][col]
-        if row < 0 or row >= rows or col < 0 or col >= cols:
+        if is_out_of_bounds(grid, row, col):
             return word, steps
         if cell == 1:
             row, col = dirs[pd](row, col)
@@ -58,8 +65,6 @@ def walk(grid: Grid, start: Coord, pd: str,
         elif cell == 3:
             word.append(lcoords[(row, col)])
             row, col = dirs[pd](row, col)
-        else:
-            return word, steps
         steps += 1
 
 
