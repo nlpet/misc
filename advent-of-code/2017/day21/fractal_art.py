@@ -8,7 +8,7 @@ Matrix = np.ndarray
 ImmutableArray = Tuple[Tuple[int]]
 Rules = Dict[ImmutableArray, np.ndarray]
 
-PIXELS = {'#': 1, '.': 0}
+PIXELS_TO_BINARY = {'#': 1, '.': 0}
 
 
 def to_tuple(matrix: Matrix) -> ImmutableArray:
@@ -26,14 +26,8 @@ def get_variations(pattern: Matrix) -> Set[Matrix]:
 
 
 def to_matrix(image: str) -> Matrix:
-    matrix = []
-    for row in image.split('/'):
-        matrix.append([PIXELS[ch] for ch in row])
-    return np.array(matrix)
-
-
-def to_immutable_array(image: str) -> ImmutableArray:
-    return
+    return np.array([[PIXELS_TO_BINARY[ch] for ch in row]
+                     for row in image.split('/')])
 
 
 def apply_enchancement(matrix: Matrix, rules: Rules) -> Matrix:
