@@ -31,10 +31,12 @@ def move(y: int, x: int, d: int) -> Tuple[int, int]:
 
 
 def main():
+    start = time()
     bursts = 10000000
-    grid_size = bursts // 10
+    grid_size = int(np.sqrt(bursts))
     nav = {0: sub, 1: lambda d, n: d, 2: add, 3: lambda d, n: d + 2}
     ch_to_bin = {'#': 2, '.': 0}
+    infections, d = 0, 0
 
     with open('input.txt', 'r') as fr:
         middle_grid = np.array([[ch_to_bin[ch] for ch in line.strip()]
@@ -44,9 +46,6 @@ def main():
     y, x = [x // 2 for x in grid.shape]
     n, m = [x // 2 for x in middle_grid.shape]
     grid[y - n: y + n + 1, x - m: x + m + 1] = middle_grid
-
-    infections, d = 0, 0
-    start = time()
 
     for burst in range(1, bursts + 1):
         d = nav[grid[y][x]](d, 1) % 4
