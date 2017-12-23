@@ -2,7 +2,6 @@
 
 
 from collections import defaultdict
-from math import sqrt
 from string import ascii_lowercase
 from typing import Set
 
@@ -16,7 +15,7 @@ def get(y: str, reg_names: Set[str], registers: defaultdict) -> int:
 def is_prime(n: int) -> bool:
     if n % 2 == 0 and n > 2:
         return False
-    return all(n % i for i in range(3, int(sqrt(n)) + 1, 2))
+    return all(n % i for i in range(3, int(n ** 0.5) + 1, 2))
 
 
 def main():
