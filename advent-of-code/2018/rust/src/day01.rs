@@ -19,14 +19,14 @@ fn parse_numbers_in_file(filename: &str) -> Vec<i32> {
 }
 
 fn run_part_one() {
-    let filename = "../inputs/day1.txt";
+    let filename = "inputs/day1.txt";
     let numbers = parse_numbers_in_file(filename);
 
-    println!("part 1 result: {}", numbers.iter().sum::<i32>());
+    println!("part 1 answer: {}", numbers.iter().sum::<i32>());
 }
 
 fn run_part_two() {
-    let filename = "../inputs/day1.txt";
+    let filename = "inputs/day1.txt";
     let numbers = &parse_numbers_in_file(filename);
     let mut seen = HashSet::new();
     let mut running_sum = 0;
@@ -37,7 +37,7 @@ fn run_part_two() {
             running_sum += &number;
 
             if seen.contains(&running_sum) {
-                println!("part 2 result: {}", running_sum);
+                println!("part 2 answer: {}", running_sum);
                 return;
             }
         }
