@@ -1,6 +1,6 @@
 use std::env;
 
-mod day02;
+mod day03;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -15,7 +15,7 @@ fn main() {
                     return;
                 }
             };
-            day02::run(part);
+            day03::run(part);
         }
     }
 }

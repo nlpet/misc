@@ -5,3 +5,4 @@ authors = ["Nora Petrova <schottkey@gmail.com>"]
 
 [dependencies]
 counter = "0.4.3"
+regex = "1"
