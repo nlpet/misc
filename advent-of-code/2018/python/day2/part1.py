@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 
 def get_matches(box_id):
@@ -17,15 +17,15 @@ def get_matches(box_id):
 
 
 def main():
-    counts = [0, 0]
+    twos, threes = 0, 0
 
     with open('input.txt', 'r') as fr:
         for line in fr:
-            twos, threes = get_matches(line.strip())
-            counts[0] += twos
-            counts[1] += threes
+            uniq_counts = set(Counter(line.strip()).values())
+            twos += int(2 in uniq_counts)
+            threes += int(3 in uniq_counts)
 
-    print('Answer to part 1: {}'.format(counts[0] * counts[1]))
+    print('Answer to part 1: {}'.format(twos * threes))
 
 
 if __name__ == '__main__':
