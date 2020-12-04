@@ -1,23 +1,24 @@
-import re
-from collections import Counter
-
-
 def main():
-    num_valid = 0
 
     with open("input.txt", "r") as fr:
-        for line in fr.readlines():
-            patt = re.search(r"(\d+)-(\d+)\s(\w):\s(\w+)$", line.strip())
-            if not patt:
-                print(f"WARNING - line missing pattern ({line.strip()})")
+        program = [int(n) for n in fr.read().strip().split(",")]
 
-            i, j, char, s = patt.groups()
-            i, j = int(i), int(j)
+    program[1] = 12
+    program[2] = 2
 
-            if int(s[i - 1] == char) + int(s[j - 1] == char) == 1:
-                num_valid += 1
+    for i in range(0, len(program), 4):
+        if program[i] == 1:
+            n, m, idx = program[i + 1 : i + 1 + 3]
+            program[idx] = program[n] + program[m]
+        elif program[i] == 2:
+            n, m, idx = program[i + 1 : i + 1 + 3]
+            program[idx] = program[n] * program[m]
+        elif program[i] == 99:
+            break
+        else:
+            print(f"Unknown opcode {program[i]} at position {i}!")
 
-    print(f"Number of valid passwords {num_valid}")
+    print(f"Value at position 0 is {program[0]}")
 
 
 if __name__ == "__main__":
