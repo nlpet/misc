@@ -19,7 +19,7 @@ def is_valid_height(hgt):
 
 def is_valid_hair_color(hcl):
     hair_color = re.search(r"#[a-f0-9]{6}", hcl)
-    return hair_color is not None
+    return hair_color is not None and len(hcl) == 7
 
 
 def is_valid_passport_id(pid):
