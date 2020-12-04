@@ -40,8 +40,8 @@ def is_passport_valid(fields, req_fields, n_req_fields):
         fields["ecl"] in {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"},
         is_valid_passport_id(fields["pid"]),
     ]
-    is_valid = all(conditions)
-    return is_valid
+
+    return all(conditions)
 
 
 def main():
