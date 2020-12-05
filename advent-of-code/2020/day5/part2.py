@@ -38,8 +38,8 @@ def main():
     with open("input.txt", "r") as fr:
         for line in fr.readlines():
             boarding_pass = line.strip()
-            row = find_seat(boarding_pass[:-3], 0, 127, "F")
-            col = find_seat(boarding_pass[-3:], 0, 7, "L")
+            row = find_seat(boarding_pass[:-3], 0, rows, "F")
+            col = find_seat(boarding_pass[-3:], 0, cols, "L")
             found_seat_ids.add(get_seat_id(row, col))
 
     for seat_id in possible_seat_ids.difference(found_seat_ids):
