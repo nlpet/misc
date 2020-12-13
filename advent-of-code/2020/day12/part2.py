@@ -1,9 +1,3 @@
-def get_waypoint_orientation(waypoint):
-    horizontal = "E" if waypoint[0] >= 0 else "W"
-    vertical = "N" if waypoint[1] < 0 else "S"
-    return [horizontal, vertical]
-
-
 def rotate(facing, direction, degrees):
     orientations = ["N", "E", "S", "W"]
 
@@ -16,27 +10,23 @@ def rotate(facing, direction, degrees):
     return orientations[(idx - n_rotations) % len(orientations)]
 
 
-def orient_waypoint(waypoint, orientation, magnitude):
-    if orientation == "N":
-        waypoint[1] = -magnitude
-    elif orientation == "S":
-        waypoint[1] = magnitude
-    elif orientation == "E":
-        waypoint[0] = magnitude
-    else:
-        waypoint[0] = -magnitude
-
-
 def rotate_waypoint(waypoint, degrees, direction):
-    wo = get_waypoint_orientation(waypoint)
-    orientation1 = rotate(wo[0], direction, degrees)
-    orientation2 = rotate(wo[1], direction, degrees)
+    orientations = [
+        rotate("E" if waypoint[0] >= 0 else "W", direction, degrees),
+        rotate("N" if waypoint[1] < 0 else "S", direction, degrees),
+    ]
 
-    horizontal_magnitude = abs(waypoint[0])
-    vertical_magnitude = abs(waypoint[1])
+    magnitudes = [abs(waypoint[0]), abs(waypoint[1])]
 
-    orient_waypoint(waypoint, orientation1, horizontal_magnitude)
-    orient_waypoint(waypoint, orientation2, vertical_magnitude)
+    for orientation, magnitude in zip(orientations, magnitudes):
+        if orientation == "N":
+            waypoint[1] = -magnitude
+        elif orientation == "S":
+            waypoint[1] = magnitude
+        elif orientation == "E":
+            waypoint[0] = magnitude
+        else:
+            waypoint[0] = -magnitude
 
 
 def move_waypoint(direction, waypoint, magnitude):
