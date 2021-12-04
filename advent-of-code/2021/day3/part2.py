@@ -4,7 +4,7 @@ import pydash.objects as po
 
 
 def get_counts(filename):
-    counts, n_bits = {}, None
+    counts = {}
 
     with open(filename) as fr:
         n_bits = len(fr.readline().strip())
