@@ -1,7 +1,6 @@
 # --- Day 11: Dumbo Octopus ---
 
 from collections import defaultdict
-from os import readlink
 
 
 MODIFIERS = [(0, -1), (0, 1), (-1, -1), (-1, 0), (-1, 1), (1, -1), (1, 0), (1, 1)]
