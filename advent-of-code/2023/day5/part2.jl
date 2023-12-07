@@ -27,7 +27,7 @@ end
 
 
 function solve()
-    almanac = split(read("test.txt", String), "\n\n")
+    almanac = split(read("input.txt", String), "\n\n")
     seeds, mappings = almanac[1], almanac[2:end]
     seeds = parse.(Int64, split(split(seeds, ": ")[2]))
     pairs = [(seeds[i], seeds[i] + seeds[i+1] - 1) for i in 1:2:length(seeds)-1]

@@ -8,19 +8,13 @@ function solve()
 
     for (t, d) in zip(times, distances)
         n = 0
-
         for vel in 0:t
-            if t * vel > d
-                n += 1
-            end
+            n += t * vel > d ? 1 : 0
             t -= 1
         end
-
         answer *= n
     end
-
     println("Answer : $answer")
-
 end
 
 solve()
