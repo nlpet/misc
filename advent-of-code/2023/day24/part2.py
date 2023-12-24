@@ -1,6 +1,4 @@
-import numpy as np
-from sympy import Symbol
-from sympy import solve_poly_system
+from sympy import solve_poly_system, symbols
 
 
 def parse(line):
@@ -14,19 +12,14 @@ def solve():
     with open("input.txt") as fr:
         hailstones = [parse(line) for line in fr.readlines()]
 
-    x = Symbol("x")
-    y = Symbol("y")
-    z = Symbol("z")
-    vx = Symbol("vx")
-    vy = Symbol("vy")
-    vz = Symbol("vz")
+    x, y, z, vx, vy, vz = symbols("x y z vx vy vz")
 
     equations = []
     ts = []
 
     for i, hailstone in enumerate(hailstones[:3]):
         (hs_x, hs_y, hs_z), (hs_vx, hs_vy, hs_vz) = hailstone
-        t = Symbol(f"t{i}")
+        t = symbols(f"t{i}")
         eq1 = x + vx * t - hs_x - hs_vx * t
         eq2 = y + vy * t - hs_y - hs_vy * t
         eq3 = z + vz * t - hs_z - hs_vz * t
